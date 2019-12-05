@@ -8,16 +8,17 @@ This chart bootstraps a [Apache SkyWalking](https://skywalking.apache.org/) depl
 
 ## Prerequisites
 
- - Kubernetes 1.9.6+ 
+ - Kubernetes 1.16+ (use branch 1.15 for earlier versions) 
  - PV dynamic provisioning support on the underlying infrastructure (StorageClass)
- - Helm 3
+ - Helm 2
 
 ## Installing the Chart
 
 To install the chart with the release name `my-release`:
 
 ```shell
-$ helm install my-release skywalking -n <namespace>
+$ helm dep up
+$ helm install --name=my-release .
 ```
 
 The command deploys Apache Skywalking on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -29,7 +30,7 @@ The command deploys Apache Skywalking on the Kubernetes cluster in the default c
 To uninstall/delete the `my-release` deployment:
 
 ```shell
-$ helm uninstall my-release -n <namespace>
+$ helm uninstall my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -149,13 +150,13 @@ The following table lists the configurable parameters of the Skywalking chart an
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
-$ helm install myrelease skywalking --set nameOverride=newSkywalking
+$ helm install my-release . --set nameOverride=newSkywalking
 ```
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-$ helm install my-release skywalking -f values.yaml
+$ helm install my-release . -f values.yaml
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
